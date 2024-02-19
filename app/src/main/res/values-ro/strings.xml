@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HohBooks</string>
+    <string name="books">Cărți</string>
+    <string name="books_for_kids">Pentru copii</string>
+    <string name="settings">Setări</string>
+    <string name="books_for_adults_title">Cărți pentru adulți</string>
+    <string name="books_for_kids_title">Cărți pentru copii</string>
+</resources>

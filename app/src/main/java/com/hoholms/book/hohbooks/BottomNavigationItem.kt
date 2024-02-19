@@ -9,7 +9,9 @@ import androidx.compose.material.icons.outlined.Book
 import androidx.compose.material.icons.outlined.ChildCare
 import androidx.compose.material.icons.outlined.CropSquare
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 
 data class BottomNavigationItem(
     val title: String = "",
@@ -19,24 +21,25 @@ data class BottomNavigationItem(
     val badgeCount: Int? = null,
     val route: String = ""
 ) {
+    @Composable
     fun bottomNavigationItems(): List<BottomNavigationItem> {
         return listOf(
             BottomNavigationItem(
-                title = "Books",
+                title = stringResource(R.string.books),
                 selectedIcon = Icons.Filled.Book,
                 unselectedIcon = Icons.Outlined.Book,
                 hasNews = false,
                 route = Screens.Books.route
             ),
             BottomNavigationItem(
-                title = "For kids",
+                title = stringResource(R.string.books_for_kids),
                 selectedIcon = Icons.Filled.ChildCare,
                 unselectedIcon = Icons.Outlined.ChildCare,
                 hasNews = false,
                 route = Screens.ForKids.route
             ),
             BottomNavigationItem(
-                title = "Settings",
+                title = stringResource(R.string.settings),
                 selectedIcon = Icons.Filled.Settings,
                 unselectedIcon = Icons.Outlined.Settings,
                 hasNews = true,
