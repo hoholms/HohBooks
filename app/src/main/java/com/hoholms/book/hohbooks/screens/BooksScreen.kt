@@ -12,13 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.hoholms.book.hohbooks.R
 import com.hoholms.book.hohbooks.ui.theme.HohBooksTheme
+import com.hoholms.book.hohbooks.viewmodel.ThemeViewModel
 
 @Composable
-fun BooksScreen(navController: NavController) {
-    HohBooksTheme {
+fun BooksScreen(navController: NavController, themeViewModel: ThemeViewModel = viewModel()) {
+    HohBooksTheme(themeSetting = themeViewModel.themeSetting.value) {
         Surface(
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {

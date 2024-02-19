@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
+import com.hoholms.book.hohbooks.viewmodel.ThemeSetting
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -84,11 +85,18 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun HohBooksTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    themeSetting: ThemeSetting,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    val systemInDarkTheme = isSystemInDarkTheme()
+    val darkTheme = when (themeSetting) {
+        ThemeSetting.Light -> false
+        ThemeSetting.Dark -> true
+        ThemeSetting.Auto -> systemInDarkTheme
+    }
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
