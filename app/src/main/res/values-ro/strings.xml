@@ -3,7 +3,10 @@
     <string name="app_name">HohBooks</string>
     <string name="books">Cărți</string>
     <string name="books_for_kids">Pentru copii</string>
-    <string name="settings">Setări</string>
+    <string name="app_theme">Tema aplicației</string>
     <string name="books_for_adults_title">Cărți pentru adulți</string>
     <string name="books_for_kids_title">Cărți pentru copii</string>
+    <string name="theme_light">Luminoasă</string>
+    <string name="theme_dark">Întunecată</string>
+    <string name="theme_auto">Auto</string>
 </resources>

@@ -30,11 +30,9 @@ fun HohBooks() {
     val themeViewModel: ThemeViewModel = viewModel(factory = ThemeViewModelFactory(context))
 
     HohBooksTheme(themeSetting = themeViewModel.themeSetting.value) {
-        // Your app's composables go here, for example:
         Surface(
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
-            // Navigation, screens, etc.
             BottomNavigationBar(themeViewModel)
         }
     }

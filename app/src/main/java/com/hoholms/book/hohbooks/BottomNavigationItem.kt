@@ -39,7 +39,7 @@ data class BottomNavigationItem(
                 route = Screens.ForKids.route
             ),
             BottomNavigationItem(
-                title = stringResource(R.string.settings),
+                title = stringResource(R.string.app_theme),
                 selectedIcon = Icons.Filled.Settings,
                 unselectedIcon = Icons.Outlined.Settings,
                 hasNews = true,

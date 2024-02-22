@@ -1,9 +1,12 @@
 package com.hoholms.book.hohbooks.viewmodel
 
 import android.content.Context
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hoholms.book.hohbooks.R
 import kotlinx.coroutines.launch
 
 enum class ThemeSetting { Light, Dark, Auto }
@@ -37,4 +40,14 @@ class ThemeViewModel(private val context: Context) : ViewModel() {
             }
         }
     }
+
+    @Composable
+    fun getI18nName(theme: ThemeSetting): String {
+        return when (theme) {
+            ThemeSetting.Light -> stringResource(R.string.theme_light)
+            ThemeSetting.Dark -> stringResource(R.string.theme_dark)
+            ThemeSetting.Auto -> stringResource(R.string.theme_auto)
+        }
+    }
+
 }
