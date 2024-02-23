@@ -1,4 +1,4 @@
-package com.hoholms.book.hohbooks
+package com.hoholms.book.hohbooks.navigation.bottom
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Badge
@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.hoholms.book.hohbooks.Screens
 import com.hoholms.book.hohbooks.screens.BooksScreen
 import com.hoholms.book.hohbooks.screens.ForKidsScreen
 import com.hoholms.book.hohbooks.screens.SettingsScreen

@@ -1,4 +1,4 @@
-package com.hoholms.book.hohbooks
+package com.hoholms.book.hohbooks.navigation.bottom
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
@@ -12,6 +12,8 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import com.hoholms.book.hohbooks.R
+import com.hoholms.book.hohbooks.Screens
 
 data class BottomNavigationItem(
     val title: String = "",

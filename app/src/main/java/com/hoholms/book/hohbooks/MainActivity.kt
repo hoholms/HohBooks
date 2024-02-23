@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.hoholms.book.hohbooks.navigation.bottom.BottomNavigationBar
 import com.hoholms.book.hohbooks.ui.theme.HohBooksTheme
 import com.hoholms.book.hohbooks.viewmodel.ThemeViewModel
 import com.hoholms.book.hohbooks.viewmodel.ThemeViewModelFactory

@@ -1,7 +1,7 @@
 package com.hoholms.book.hohbooks
 
 sealed class Screens(val route: String) {
-    object Books : Screens("books_route")
-    object ForKids : Screens("for_kids_route")
-    object Settings : Screens("settings_route")
+    data object Books : Screens("books_route")
+    data object ForKids : Screens("for_kids_route")
+    data object Settings : Screens("settings_route")
 }
