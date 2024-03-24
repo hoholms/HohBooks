@@ -1,40 +1,53 @@
 package com.hoholms.book.hohbooks.screens
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Celebration
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.hoholms.book.hohbooks.Book
-import com.hoholms.book.hohbooks.BookCard
 import com.hoholms.book.hohbooks.R
+import com.hoholms.book.hohbooks.model.Book
+import com.hoholms.book.hohbooks.model.BookCard
 import com.hoholms.book.hohbooks.ui.theme.HohBooksTheme
 import com.hoholms.book.hohbooks.viewmodel.ThemeViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BooksScreen(navController: NavController, themeViewModel: ThemeViewModel = viewModel()) {
-    var showDialog by remember { mutableStateOf(false) }
+    var isSheetOpen by rememberSaveable { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState()
+    var selectedBook by remember { mutableStateOf(Book()) }
 
     HohBooksTheme(themeSetting = themeViewModel.themeSetting.value) {
         Surface(
@@ -54,14 +67,42 @@ fun BooksScreen(navController: NavController, themeViewModel: ThemeViewModel = v
                     modifier = Modifier.padding(vertical = 20.dp)
                 )
 
-                if (showDialog) {
-                    AlertDialogExample(
-                        onDismissRequest = { showDialog = false },
-                        onConfirmation = { showDialog = false },
-                        dialogTitle = "Congratulations",
-                        dialogText = "You pressed this button!",
-                        icon = Icons.Filled.Celebration
-                    )
+                if (isSheetOpen) {
+//                    AlertDialogExample(
+//                        onDismissRequest = { showBottomSheet = false },
+//                        onConfirmation = { showBottomSheet = false },
+//                        dialogTitle = "Congratulations",
+//                        dialogText = "You pressed this button!",
+//                        icon = Icons.Filled.Celebration
+//                    )
+
+                    ModalBottomSheet(
+                        sheetState = sheetState,
+                        onDismissRequest = { isSheetOpen = false }
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .height(500.dp)
+                        ) {
+                            Text(
+                                text = selectedBook.title,
+                                style = MaterialTheme.typography.headlineLarge,
+                                modifier = Modifier.padding(bottom = 4.dp)
+                            )
+                            Text(
+                                text = selectedBook.author,
+                                style = MaterialTheme.typography.headlineSmall,
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            )
+                            Text(
+                                text = selectedBook.description,
+                                style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier.padding(bottom = 24.dp)
+                            )
+                            Share(text = selectedBook.toString(), context = LocalContext.current)
+                        }
+                    }
                 }
 
                 val books = listOf(
@@ -108,11 +149,30 @@ fun BooksScreen(navController: NavController, themeViewModel: ThemeViewModel = v
                     )
                 )
                 books.forEach { book: Book ->
-                    BookCard(book = book, onClick1 = { showDialog = true })
+                    BookCard(
+                        book = book,
+                        onClick1 = { isSheetOpen = true; selectedBook = book })
                 }
 
             }
         }
+    }
+}
+
+@Composable
+fun Share(text: String, context: Context) {
+    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+        putExtra(Intent.EXTRA_TEXT, text)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+
+
+    FilledTonalButton(onClick = {
+        startActivity(context, shareIntent, null)
+    }) {
+        Icon(imageVector = Icons.Default.Share, contentDescription = null)
+        Text("Share", modifier = Modifier.padding(start = 8.dp))
     }
 }
 

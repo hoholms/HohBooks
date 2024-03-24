@@ -1,4 +1,4 @@
-package com.hoholms.book.hohbooks
+package com.hoholms.book.hohbooks.screens
 
 sealed class Screens(val route: String) {
     data object Books : Screens("books_route")

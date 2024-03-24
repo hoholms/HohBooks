@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.hoholms.book.hohbooks.R
-import com.hoholms.book.hohbooks.Screens
+import com.hoholms.book.hohbooks.screens.Screens
 
 data class BottomNavigationItem(
     val title: String = "",
