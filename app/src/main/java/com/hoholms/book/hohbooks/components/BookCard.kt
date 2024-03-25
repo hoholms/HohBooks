@@ -1,4 +1,4 @@
-package com.hoholms.book.hohbooks.model
+package com.hoholms.book.hohbooks.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -17,28 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hoholms.book.hohbooks.R
-
-data class Book(
-    val cover: Int = R.drawable.ic_launcher_foreground,
-    val title: String = "Book",
-    val author: String = "Author",
-    val description: String = "Description"
-) {
-    override fun toString(): String {
-        return """
-            |===================================
-            |📖 Title: $title
-            |👤 Author: $author
-            |📚 Description: 
-            |$description
-            |🎨 Cover ID: $cover
-            |===================================
-        """.trimMargin()
-    }
-}
+import com.hoholms.book.hohbooks.model.Book
 
 @Composable
 fun BookCard(book: Book = Book(), onClick1: () -> Unit = {}) {
@@ -53,9 +36,8 @@ fun BookCard(book: Book = Book(), onClick1: () -> Unit = {}) {
         onClick = onClick1
     ) {
         Row(
-//            modifier = Modifier
-//                .background(MaterialTheme.colorScheme.secondaryContainer),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(start = 12.dp)
         ) {
             // Left side: Book Cover
             Image(
@@ -63,8 +45,8 @@ fun BookCard(book: Book = Book(), onClick1: () -> Unit = {}) {
                 contentDescription = null,
                 modifier = Modifier
                     .size(120.dp)
-                    .clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop,
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop
             )
 
             // Right side: Title, Author, and Description
@@ -83,7 +65,10 @@ fun BookCard(book: Book = Book(), onClick1: () -> Unit = {}) {
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
                 Text(
-                    text = book.description, style = MaterialTheme.typography.bodySmall
+                    text = book.description,
+                    style = MaterialTheme.typography.bodySmall,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 4
                 )
             }
         }
@@ -94,7 +79,7 @@ fun BookCard(book: Book = Book(), onClick1: () -> Unit = {}) {
 @Composable
 fun PreviewBookCard() {
     val book = Book(
-        cover = R.drawable.ic_launcher_foreground,
+        cover = R.drawable.harry_potter_and_the_sorcerers_stone,
         title = "Sample Book Title",
         author = "John Doe",
         description = "A sample book description for preview purposes. This is a long description that provides more information about the book."

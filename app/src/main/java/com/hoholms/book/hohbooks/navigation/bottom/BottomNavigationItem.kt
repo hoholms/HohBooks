@@ -44,7 +44,7 @@ data class BottomNavigationItem(
                 title = stringResource(R.string.app_theme),
                 selectedIcon = Icons.Filled.Settings,
                 unselectedIcon = Icons.Outlined.Settings,
-                hasNews = true,
+                hasNews = false,
                 route = Screens.Settings.route
             )
         )
