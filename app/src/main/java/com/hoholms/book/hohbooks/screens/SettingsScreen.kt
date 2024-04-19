@@ -18,6 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -31,6 +33,7 @@ import com.hoholms.book.hohbooks.viewmodel.ThemeViewModel
 @Composable
 fun SettingsScreen(navController: NavController, themeViewModel: ThemeViewModel = viewModel()) {
     var selectedTheme by remember { mutableStateOf(themeViewModel.themeSetting.value) }
+    val haptic = LocalHapticFeedback.current
 
     HohBooksTheme(themeSetting = themeViewModel.themeSetting.value) {
         Surface(
@@ -58,8 +61,11 @@ fun SettingsScreen(navController: NavController, themeViewModel: ThemeViewModel 
                             ),
                             selected = selectedTheme == theme,
                             onClick = {
-                                selectedTheme = theme
-                                themeViewModel.setTheme(theme)
+                                if (theme != selectedTheme) {
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    selectedTheme = theme
+                                    themeViewModel.setTheme(theme)
+                                }
                             }
                         ) {
                             Text(themeViewModel.getI18nName(theme))
